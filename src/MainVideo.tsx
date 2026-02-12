@@ -2,7 +2,7 @@ import React from "react";
 import {
     AbsoluteFill,
     OffthreadVideo,
-    interpolate, useCurrentFrame, useVideoConfig, spring,
+    useCurrentFrame, useVideoConfig, spring,
     Html5Audio,
     Sequence
 } from "remotion";
@@ -14,6 +14,7 @@ import {
     TRANSITION_DURATION,
     REPETITIONS
 } from "./constants";
+import { Countdown } from "./Countdown";
 
 import { loadFont } from "@remotion/google-fonts/Fredoka";
 import video1 from "./assets/videos/clipe1.mp4";
@@ -28,11 +29,7 @@ const { fontFamily } = loadFont("normal", {
     weights: ["700"],
 });
 
-const FloatingText: React.FC<{
-    content: string;
-    fontFamily: string;
-    style?: React.CSSProperties
-}> = ({ content, fontFamily, style }) => {
+const FloatingText: React.FC<{ content: string; fontFamily: string; style?: React.CSSProperties }> = ({ content, fontFamily, style }) => {
     const frame = useCurrentFrame();
     const { fps } = useVideoConfig();
 
@@ -40,40 +37,41 @@ const FloatingText: React.FC<{
         frame,
         fps,
         config: {
-            stiffness: 150,
-            damping: 10,
-            mass: 1,
+            stiffness: 100,
+            damping: 15,
         },
-    });
-
-    const scale = interpolate(entrance, [0, 1], [0.5, 1], {
-        extrapolateRight: "clamp",
+        durationInFrames: 30,
     });
 
     const wobble = Math.sin(frame / 8) * 0.02 + 1;
 
     return (
         <AbsoluteFill
-            className="flex flex-col items-center"
-            style={{ ...style }}
+            className="flex items-center"
+            style={{
+                ...style,
+                paddingLeft: '60px',
+                paddingRight: '60px',
+            }}
         >
             <Html5Audio src={swoshSound} />
             <div
                 className="text-3d-wrapper"
                 style={{
-                    transform: `scale(${scale * wobble})`,
-                    ['--font-family' as any]: fontFamily,
+                    transform: `scale(${entrance * wobble})`,
+                    opacity: entrance,
+                    width: '100%',
                 }}
             >
-                <div className="text-3d-layer text-shadow-layer">
+                {/* Camada de Sombra (Profundidade) */}
+                <span className="text-3d-layer text-shadow-layer" style={{ "--font-family": fontFamily } as any}>
                     {content}
-                </div>
-                <div className="text-3d-layer text-main-layer">
+                </span>
+
+                {/* Camada de Brilho (Topo) */}
+                <span className="text-3d-layer text-main-layer" style={{ "--font-family": fontFamily } as any}>
                     {content}
-                </div>
-                <div className="text-3d-layer text-highlight-layer">
-                    {content}
-                </div>
+                </span>
             </div>
         </AbsoluteFill>
     );
@@ -83,7 +81,7 @@ const FloatingText: React.FC<{
 export const MainVideo: React.FC = () => {
     return (
         <AbsoluteFill style={{ backgroundColor: "black" }}>
-            {/* Música de Fundo: toca a partir do clipe 2 de forma corrida */}
+            {/* Música de Fundo: toca a partir do clipe 2 */}
             <Sequence from={CLIP1_DURATION - TRANSITION_DURATION}>
                 <Html5Audio src={backgroundMusic} volume={0.3} />
             </Sequence>
@@ -122,6 +120,7 @@ export const MainVideo: React.FC = () => {
                             volume={0}
                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                         />
+                        <Countdown />
                         <FloatingText
                             content={"Do you know the name of this is? "}
                             fontFamily={fontFamily}

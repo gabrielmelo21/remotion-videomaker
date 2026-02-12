@@ -1,4 +1,5 @@
 import "./index.css";
+import React from "react";
 import { Composition } from "remotion";
 import { MainVideo } from "./MainVideo";
 import {
@@ -24,4 +25,3 @@ export const RemotionRoot: React.FC = () => {
     </>
   );
 };
-
