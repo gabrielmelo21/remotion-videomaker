@@ -1,1 +1,48 @@
 @import "tailwindcss";
+
+:root {
+    --text-size: 140px;
+    --line-height: 1.1;
+}
+
+.text-3d-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-3d-layer {
+    position: absolute;
+    font-family: var(--font-family);
+    font-size: var(--text-size);
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: var(--line-height);
+    white-space: pre-line;
+}
+
+.text-shadow-layer {
+    color: #CC8800;
+    text-shadow:
+        2px 2px 0 #B87700,
+        4px 4px 0 #A56600,
+        6px 6px 0 #925500,
+        8px 8px 0 #7F4400,
+        10px 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.text-main-layer {
+    color: #ffd900ff;
+    -webkit-text-stroke: 5px #B8860B;
+    paint-order: stroke fill;
+}
+
+.text-highlight-layer {
+    background: linear-gradient(to bottom, transparent, transparent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
