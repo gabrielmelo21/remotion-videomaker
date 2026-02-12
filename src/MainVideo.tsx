@@ -17,17 +17,18 @@ import {
 import { Countdown } from "./Countdown";
 import { Arrow } from "./Arrow";
 
-import { loadFont } from "@remotion/google-fonts/Fredoka";
+import { loadFont } from "@remotion/google-fonts/DynaPuff";
 import video1 from "./assets/videos/clipe1.mp4";
 import video2 from "./assets/videos/clipe2-veo.mp4";
+import introVideo from "./assets/videos/pilotando-f1.mp4";
 import truckSound from "./assets/audios/truck-sound.mp3";
 import swoshSound from "./assets/audios/swosh.mp3";
 import IntroAudio from "./assets/audios/Aprenda-ingles-com-lingobot-v3.wav";
 import backgroundMusic from "./assets/audios/background-music.mp3";
-
+import titleImage from "./assets/images/title.webp";
 
 const { fontFamily } = loadFont("normal", {
-    weights: ["700"],
+    weights: ["400"],
 });
 
 const FloatingText: React.FC<{ content: string; fontFamily: string; style?: React.CSSProperties }> = ({ content, fontFamily, style }) => {
@@ -69,12 +70,40 @@ const FloatingText: React.FC<{ content: string; fontFamily: string; style?: Reac
                     {content}
                 </span>
 
-                {/* Camada de Brilho (Topo) */}
+                {/* Camada Principal (Topo + Contorno) */}
                 <span className="text-3d-layer text-main-layer" style={{ "--font-family": fontFamily } as any}>
                     {content}
                 </span>
             </div>
         </AbsoluteFill>
+    );
+};
+
+
+const WatermarkCover: React.FC = () => {
+    return (
+        <div
+            style={{
+                position: 'absolute',
+                bottom: '-10px',
+                right: '-10px',
+                width: '240px',
+                display: 'flex',
+                justifyContent: 'right',
+                alignItems: 'right',
+                pointerEvents: 'none',
+            }}
+        >
+            <img
+                src={titleImage}
+                style={{
+                    width: '120%',
+                    height: 'auto',
+                    objectFit: 'contain',
+                    filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.5))',
+                }}
+            />
+        </div>
     );
 };
 
@@ -91,8 +120,8 @@ export const MainVideo: React.FC = () => {
             <TransitionSeries>
                 <TransitionSeries.Sequence durationInFrames={CLIP1_DURATION} name="clipe1">
                     <OffthreadVideo
-                        src={video1}
-                        trimBefore={21}
+                        src={introVideo}
+                        volume={0}
                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     />
                     <Html5Audio src={truckSound} />
@@ -100,8 +129,9 @@ export const MainVideo: React.FC = () => {
                     <FloatingText
                         content={"Aprenda Inglês com \nLingobot!"}
                         fontFamily={fontFamily}
-                        style={{ paddingTop: '350px' }}
+                        style={{ justifyContent: 'flex-end', paddingBottom: '350px' }}
                     />
+                    <WatermarkCover />
                 </TransitionSeries.Sequence>
 
                 {/* Repetição do clipe 2 por REPETITIONS vezes */}
@@ -121,6 +151,7 @@ export const MainVideo: React.FC = () => {
                             volume={0}
                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                         />
+                        <WatermarkCover />
                         <Arrow
                             x={-300}
                             y={-500}
@@ -131,7 +162,7 @@ export const MainVideo: React.FC = () => {
                         <FloatingText
                             content={"Do you know the name of this is? "}
                             fontFamily={fontFamily}
-                            style={{ justifyContent: 'flex-end', paddingBottom: '200px' }}
+                            style={{ justifyContent: 'flex-end', paddingBottom: '400px' }}
                         />
                     </TransitionSeries.Sequence>
                 ])}

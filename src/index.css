@@ -25,24 +25,25 @@
 }
 
 .text-shadow-layer {
-    color: #CC8800;
+    color: #b26200;
+    -webkit-text-stroke: 8px #b26200;
+    paint-order: stroke fill;
     text-shadow:
-        2px 2px 0 #B87700,
-        4px 4px 0 #A56600,
-        6px 6px 0 #925500,
-        8px 8px 0 #7F4400,
-        10px 10px 20px rgba(0, 0, 0, 0.5);
+        1px 1px 0 #b26200,
+        2px 2px 0 #b26200,
+        3px 3px 0 #b26200,
+        4px 4px 0 #b26200,
+        5px 5px 15px rgba(0, 0, 0, 0.5);
 }
 
 .text-main-layer {
-    color: #ffd900ff;
-    -webkit-text-stroke: 5px #B8860B;
+    color: #FFD200;
+    -webkit-text-stroke: 8px #FF8C00;
     paint-order: stroke fill;
 }
 
 .text-highlight-layer {
-    background: linear-gradient(to bottom, transparent, transparent);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: white;
+    filter: blur(4px);
+    opacity: 0.3;
 }
