@@ -15,6 +15,7 @@ import {
     REPETITIONS
 } from "./constants";
 import { Countdown } from "./Countdown";
+import { Arrow } from "./Arrow";
 
 import { loadFont } from "@remotion/google-fonts/Fredoka";
 import video1 from "./assets/videos/clipe1.mp4";
@@ -119,6 +120,12 @@ export const MainVideo: React.FC = () => {
                             src={video2}
                             volume={0}
                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        />
+                        <Arrow
+                            x={-300}
+                            y={-500}
+                            rotation={180}
+                            size={250}
                         />
                         <Countdown />
                         <FloatingText
