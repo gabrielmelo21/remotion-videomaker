@@ -5,12 +5,13 @@ import { MainVideo } from "./MainVideo";
 import {
   CLIP1_DURATION,
   CLIP2_DURATION,
+  CLIP2_VOLTA_DURATION,
+  CLIP_LAST_DURATION,
   TRANSITION_DURATION,
-  REPETITIONS
 } from "./constants";
 
 export const RemotionRoot: React.FC = () => {
-  const totalDuration = CLIP1_DURATION + (CLIP2_DURATION - TRANSITION_DURATION) * REPETITIONS;
+  const totalDuration = CLIP1_DURATION + CLIP2_DURATION + CLIP2_VOLTA_DURATION + CLIP_LAST_DURATION - (TRANSITION_DURATION * 2);
 
   return (
     <>

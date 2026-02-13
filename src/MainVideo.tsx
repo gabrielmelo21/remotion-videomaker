@@ -1,116 +1,55 @@
-import React from "react";
 import {
     AbsoluteFill,
     OffthreadVideo,
-    useCurrentFrame, useVideoConfig, spring,
     Html5Audio,
-    Sequence
+    Sequence,
+    Loop,
 } from "remotion";
 import { TransitionSeries, linearTiming } from "@remotion/transitions";
-import { slide } from "@remotion/transitions/slide";
+import { fade } from "@remotion/transitions/fade";
 import {
     CLIP1_DURATION,
     CLIP2_DURATION,
+    CLIP2_VOLTA_DURATION,
+    CLIP_LAST_DURATION,
     TRANSITION_DURATION,
-    REPETITIONS
+    COUNTDOWN_TOTAL_DURATION,
 } from "./constants";
-import { Countdown } from "./Countdown";
+
+// Componentes
+import { FloatingText } from "./FloatingText";
+import { WatermarkCover } from "./WatermarkCover";
 import { Arrow } from "./Arrow";
 
+// Fontes
 import { loadFont } from "@remotion/google-fonts/DynaPuff";
-import video1 from "./assets/videos/clipe1.mp4";
-import video2 from "./assets/videos/clipe2-veo.mp4";
-import introVideo from "./assets/videos/pilotando-f1.mp4";
-import truckSound from "./assets/audios/truck-sound.mp3";
-import swoshSound from "./assets/audios/swosh.mp3";
-import IntroAudio from "./assets/audios/Aprenda-ingles-com-lingobot-v3.wav";
+import { Countdown } from "./Countdown";
+
+// Áudios
+import f1Sound from "./assets/tools/f1-sound.mp3";
 import backgroundMusic from "./assets/audios/background-music.mp3";
-import titleImage from "./assets/images/title.webp";
+
+// Videos 
+import introVideo from "./assets/videos/pilotando-f1.mp4";
+import mainVideo from "./assets/videos/cozinhando.mp4";
+import mainVideoReversed from "./assets/videos/main-video-reversed.mp4";
+import lastVideo from "./assets/videos/comendo-mingal.mp4";
+
+// Falas
+import say_intro from "./assets/falas/Aprenda-ingles-com-lingobot-v3.wav";
+import say_asking1 from "./assets/falas/do you know what's the name of this.wav";
+import say_response1 from "./assets/falas/pot.wav";
+import say_asking2 from "./assets/falas/whats-lingobot-doin.mp3";
+import say_response2 from "./assets/falas/hes-cooking.wav";
 
 const { fontFamily } = loadFont("normal", {
     weights: ["400"],
 });
 
-const FloatingText: React.FC<{ content: string; fontFamily: string; style?: React.CSSProperties }> = ({ content, fontFamily, style }) => {
-    const frame = useCurrentFrame();
-    const { fps } = useVideoConfig();
-
-    const entrance = spring({
-        frame,
-        fps,
-        config: {
-            stiffness: 100,
-            damping: 15,
-        },
-        durationInFrames: 30,
-    });
-
-    const wobble = Math.sin(frame / 8) * 0.02 + 1;
-
-    return (
-        <AbsoluteFill
-            className="flex items-center"
-            style={{
-                ...style,
-                paddingLeft: '60px',
-                paddingRight: '60px',
-            }}
-        >
-            <Html5Audio src={swoshSound} />
-            <div
-                className="text-3d-wrapper"
-                style={{
-                    transform: `scale(${entrance * wobble})`,
-                    opacity: entrance,
-                    width: '100%',
-                }}
-            >
-                {/* Camada de Sombra (Profundidade) */}
-                <span className="text-3d-layer text-shadow-layer" style={{ "--font-family": fontFamily } as any}>
-                    {content}
-                </span>
-
-                {/* Camada Principal (Topo + Contorno) */}
-                <span className="text-3d-layer text-main-layer" style={{ "--font-family": fontFamily } as any}>
-                    {content}
-                </span>
-            </div>
-        </AbsoluteFill>
-    );
-};
-
-
-const WatermarkCover: React.FC = () => {
-    return (
-        <div
-            style={{
-                position: 'absolute',
-                bottom: '-10px',
-                right: '-10px',
-                width: '240px',
-                display: 'flex',
-                justifyContent: 'right',
-                alignItems: 'right',
-                pointerEvents: 'none',
-            }}
-        >
-            <img
-                src={titleImage}
-                style={{
-                    width: '120%',
-                    height: 'auto',
-                    objectFit: 'contain',
-                    filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.5))',
-                }}
-            />
-        </div>
-    );
-};
-
-
 export const MainVideo: React.FC = () => {
     return (
         <AbsoluteFill style={{ backgroundColor: "black" }}>
+
             {/* Música de Fundo: toca a partir do clipe 2 */}
             <Sequence from={CLIP1_DURATION - TRANSITION_DURATION}>
                 <Html5Audio src={backgroundMusic} volume={0.3} />
@@ -118,55 +57,142 @@ export const MainVideo: React.FC = () => {
 
             {/* Camada de Vídeo e Áudio com Transição */}
             <TransitionSeries>
+
+                {/* Intro */}
                 <TransitionSeries.Sequence durationInFrames={CLIP1_DURATION} name="clipe1">
                     <OffthreadVideo
                         src={introVideo}
                         volume={0}
                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     />
-                    <Html5Audio src={truckSound} />
-                    <Html5Audio src={IntroAudio} />
+                    <Html5Audio src={f1Sound} trimBefore={24 * 30} volume={0.5} />
+                    <Html5Audio src={say_intro} />
                     <FloatingText
                         content={"Aprenda Inglês com \nLingobot!"}
                         fontFamily={fontFamily}
-                        style={{ justifyContent: 'flex-end', paddingBottom: '350px' }}
+                        yPosition="bottom"
+                        paddingBottom="350px"
                     />
                     <WatermarkCover />
                 </TransitionSeries.Sequence>
 
-                {/* Repetição do clipe 2 por REPETITIONS vezes */}
-                {[...Array(REPETITIONS)].flatMap((_, i) => [
-                    <TransitionSeries.Transition
-                        key={`trans-${i}`}
-                        presentation={slide({ direction: 'from-right' })}
-                        timing={linearTiming({ durationInFrames: TRANSITION_DURATION })}
-                    />,
-                    <TransitionSeries.Sequence
-                        key={`seq-${i}`}
-                        durationInFrames={CLIP2_DURATION}
-                        name={`clipe2-rep-${i}`}
-                    >
-                        <OffthreadVideo
-                            src={video2}
-                            volume={0}
-                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                        />
-                        <WatermarkCover />
-                        <Arrow
-                            x={-300}
-                            y={-500}
-                            rotation={180}
-                            size={250}
-                        />
-                        <Countdown />
+                <TransitionSeries.Transition
+                    presentation={fade()}
+                    timing={linearTiming({ durationInFrames: TRANSITION_DURATION })}
+                />
+
+                {/* Clipe 2: Ida (Normal) */}
+                <TransitionSeries.Sequence durationInFrames={CLIP2_DURATION} name="clipe2-ida">
+                    <OffthreadVideo
+                        src={mainVideo}
+                        volume={0}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
+                    <WatermarkCover />
+
+                    <Sequence durationInFrames={85 + COUNTDOWN_TOTAL_DURATION}>
+                        <Arrow x={-300} y={700} rotation={180} size={250} />
                         <FloatingText
                             content={"Do you know the name of this is? "}
                             fontFamily={fontFamily}
-                            style={{ justifyContent: 'flex-end', paddingBottom: '400px' }}
+                            yPosition="top"
+                            paddingTop="200px"
+                            textSize="90px"
                         />
-                    </TransitionSeries.Sequence>
-                ])}
+                    </Sequence>
+
+                    <Html5Audio src={say_asking1} />
+                    <Sequence from={85}>
+                        <Countdown />
+                    </Sequence>
+
+                    <Sequence from={95 + COUNTDOWN_TOTAL_DURATION}>
+                        <FloatingText
+                            content={"Pot"}
+                            fontFamily={fontFamily}
+                            yPosition="bottom"
+                            paddingBottom="350px"
+                            textSize="120px"
+                        />
+                        <FloatingText
+                            content={"Panela"}
+                            fontFamily={fontFamily}
+                            yPosition="bottom"
+                            paddingBottom="250px"
+                            textSize="50px"
+                        />
+                    </Sequence>
+
+
+                    <Sequence from={85 + COUNTDOWN_TOTAL_DURATION}>
+                        <Html5Audio src={say_response1} />
+                    </Sequence>
+
+
+                </TransitionSeries.Sequence>
+
+
+
+
+
+
+
+
+
+                {/* Clipe 2: Volta (Normal) -> Colado sem transição */}
+                <TransitionSeries.Sequence durationInFrames={CLIP2_VOLTA_DURATION} name="clipe2-volta">
+                    <Loop durationInFrames={238}>
+                        <OffthreadVideo
+                            src={mainVideoReversed}
+                            volume={0}
+                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        />
+                    </Loop>
+                    <WatermarkCover />
+
+                    <Sequence from={45} durationInFrames={112}>
+                        <Html5Audio src={say_asking2} />
+
+                        <FloatingText
+                            content={"What's Lingobot doing?"}
+                            fontFamily={fontFamily}
+                            yPosition="top"
+                            paddingTop="200px"
+                            textSize="90px"
+                        />
+                    </Sequence>
+
+                    <Sequence from={157}>
+                        <Countdown />
+                    </Sequence>
+
+                    <Sequence from={157 + COUNTDOWN_TOTAL_DURATION + 30}>
+                        <Html5Audio src={say_response2} />
+                        <FloatingText
+                            content={"He's cooking!"}
+                            fontFamily={fontFamily}
+                            yPosition="bottom"
+                            paddingBottom="350px"
+                            textSize="120px"
+                        />
+                    </Sequence>
+                </TransitionSeries.Sequence>
+
+                <TransitionSeries.Transition
+                    presentation={fade()}
+                    timing={linearTiming({ durationInFrames: TRANSITION_DURATION })}
+                />
+
+                <TransitionSeries.Sequence durationInFrames={CLIP_LAST_DURATION} name="last-clip">
+                    <OffthreadVideo
+                        src={lastVideo}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
+                    <WatermarkCover />
+                </TransitionSeries.Sequence>
+
             </TransitionSeries>
+
         </AbsoluteFill>
     );
 };

@@ -1,6 +1,8 @@
 export const CLIP1_DURATION = 220;
-export const CLIP2_DURATION = 240;
+export const CLIP2_DURATION = 238;
+export const CLIP2_VOLTA_DURATION = 380;
+export const CLIP_LAST_DURATION = 150;
 export const TRANSITION_DURATION = 15;
-export const REPETITIONS = 3;
+export const REPETITIONS = 2;
 export const COUNTDOWN_DURATION_PER_NUMBER = 30;
 export const COUNTDOWN_TOTAL_DURATION = COUNTDOWN_DURATION_PER_NUMBER * 3;
