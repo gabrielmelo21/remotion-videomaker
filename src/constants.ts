@@ -1,6 +1,6 @@
 export const CLIP1_DURATION = 220;
 export const CLIP2_DURATION = 238;
-export const CLIP2_VOLTA_DURATION = 380;
+export const CLIP2_VOLTA_DURATION = 470;
 export const CLIP_LAST_DURATION = 150;
 export const TRANSITION_DURATION = 15;
 export const REPETITIONS = 2;

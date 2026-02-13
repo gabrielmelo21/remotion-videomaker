@@ -50,8 +50,8 @@ export const MainVideo: React.FC = () => {
     return (
         <AbsoluteFill style={{ backgroundColor: "black" }}>
 
-            {/* Música de Fundo: toca a partir do clipe 2 */}
-            <Sequence from={CLIP1_DURATION - TRANSITION_DURATION}>
+            {/* Música de Fundo: toca a partir do clipe 2 até o início da transição final */}
+            <Sequence from={CLIP1_DURATION - TRANSITION_DURATION} durationInFrames={CLIP2_DURATION + CLIP2_VOLTA_DURATION - TRANSITION_DURATION}>
                 <Html5Audio src={backgroundMusic} volume={0.3} />
             </Sequence>
 
