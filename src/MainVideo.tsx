@@ -91,7 +91,7 @@ export const MainVideo: React.FC = () => {
                     <WatermarkCover />
 
                     <Sequence durationInFrames={85 + COUNTDOWN_TOTAL_DURATION}>
-                        <Arrow x={-300} y={700} rotation={180} size={250} />
+                        <Arrow x={-300} y={700} rotation={160} size={250} />
                         <FloatingText
                             content={"Do you know the name of this is? "}
                             fontFamily={fontFamily}
@@ -119,7 +119,7 @@ export const MainVideo: React.FC = () => {
                             fontFamily={fontFamily}
                             yPosition="bottom"
                             paddingBottom="250px"
-                            textSize="50px"
+                            textSize="80px"
                         />
                     </Sequence>
 
@@ -169,7 +169,7 @@ export const MainVideo: React.FC = () => {
                     <Sequence from={157 + COUNTDOWN_TOTAL_DURATION + 30}>
                         <Html5Audio src={say_response2} />
                         <FloatingText
-                            content={"He's cooking!"}
+                            content={"He is cooking porridge in the Pot"}
                             fontFamily={fontFamily}
                             yPosition="bottom"
                             paddingBottom="350px"
@@ -188,6 +188,25 @@ export const MainVideo: React.FC = () => {
                         src={lastVideo}
                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     />
+
+                    <Sequence>
+                        <FloatingText
+                            content={"Porridge"}
+                            fontFamily={fontFamily}
+                            yPosition="bottom"
+                            paddingBottom="350px"
+                            textSize="120px"
+                        />
+                        <FloatingText
+                            content={"Mingau"}
+                            fontFamily={fontFamily}
+                            yPosition="bottom"
+                            paddingBottom="250px"
+                            textSize="80px"
+                        />
+                    </Sequence>
+
+
                     <WatermarkCover />
                 </TransitionSeries.Sequence>
 
