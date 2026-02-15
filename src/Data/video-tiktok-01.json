@@ -1,0 +1,21 @@
+{
+    "backgroundMusic": "assets/audios/background-music.mp3",
+    "introVideo": "assets/videos/pilotando-f1.mp4",
+    "introSoundEffect": "assets/tools/f1-sound.mp3",
+    "introSpeech": "assets/falas/Aprenda-ingles-com-lingobot-v3.wav",
+    "introText": "Aprenda Inglês com \nLingobot!",
+    "mainVideo": "assets/videos/cozinhando.mp4",
+    "mainVideoReversed": "assets/videos/main-video-reversed.mp4",
+    "question1Speech": "assets/falas/do you know what's the name of this.wav",
+    "question1Text": "Do you know the name of this is? ",
+    "answer1Speech": "assets/falas/pot.wav",
+    "answer1TextEn": "Pot",
+    "answer1TextPt": "Panela",
+    "question2Speech": "assets/falas/whats-lingobot-doin.mp3",
+    "question2Text": "What's Lingobot doing?",
+    "answer2Speech": "assets/falas/hes-cooking.wav",
+    "answer2Text": "He is cooking porridge in the Pot",
+    "outroVideo": "assets/videos/comendo-mingal.mp4",
+    "outroTextEn": "Porridge",
+    "outroTextPt": "Mingau"
+}

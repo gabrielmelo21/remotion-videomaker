@@ -1,6 +1,5 @@
 import React from "react";
-import { AbsoluteFill, useCurrentFrame } from "remotion";
-import arrowImg from "./assets/images/arrow.png";
+import { AbsoluteFill, useCurrentFrame, staticFile } from "remotion";
 
 interface ArrowProps {
     x?: number;
@@ -29,7 +28,7 @@ export const Arrow: React.FC<ArrowProps> = ({
             }}
         >
             <img
-                src={arrowImg}
+                src={staticFile("assets/images/arrow.png")}
                 style={{
                     position: 'absolute',
                     left: `calc(50% + ${x}px)`,

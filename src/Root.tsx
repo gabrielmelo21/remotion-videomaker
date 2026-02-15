@@ -1,7 +1,7 @@
 import "./index.css";
 import React from "react";
 import { Composition } from "remotion";
-import { MainVideo } from "./MainVideo";
+import { MainVideo, MainVideoSchema } from "./MainVideo";
 import {
   CLIP1_DURATION,
   CLIP2_DURATION,
@@ -9,6 +9,7 @@ import {
   CLIP_LAST_DURATION,
   TRANSITION_DURATION,
 } from "./constants";
+import myData from './Data/video-tiktok-01.json';
 
 export const RemotionRoot: React.FC = () => {
   const totalDuration = CLIP1_DURATION + CLIP2_DURATION + CLIP2_VOLTA_DURATION + CLIP_LAST_DURATION - (TRANSITION_DURATION * 2);
@@ -22,6 +23,8 @@ export const RemotionRoot: React.FC = () => {
         fps={30}
         width={1080}
         height={1920}
+        schema={MainVideoSchema}
+        defaultProps={myData}
       />
     </>
   );

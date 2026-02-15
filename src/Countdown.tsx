@@ -1,9 +1,5 @@
 import React from "react";
-import { AbsoluteFill, Series, Html5Audio, useVideoConfig, spring, useCurrentFrame, interpolate } from "remotion";
-import img3 from "./assets/images/3.png";
-import img2 from "./assets/images/2.png";
-import img1 from "./assets/images/1.png";
-import sound from "./assets/audios/countdown.mp3";
+import { AbsoluteFill, Series, Html5Audio, useVideoConfig, spring, useCurrentFrame, interpolate, staticFile } from "remotion";
 
 const NumberDisplay: React.FC<{ src: string }> = ({ src }) => {
     const frame = useCurrentFrame();
@@ -24,9 +20,9 @@ const NumberDisplay: React.FC<{ src: string }> = ({ src }) => {
 
     return (
         <AbsoluteFill className="flex justify-center items-center">
-            <Html5Audio src={sound} />
+            <Html5Audio src={staticFile("assets/audios/countdown.mp3")} />
             <img
-                src={src}
+                src={staticFile(src)}
                 style={{
                     width: 400,
                     height: 400,
@@ -44,13 +40,13 @@ export const Countdown: React.FC<{ durationPerNumber?: number }> = ({ durationPe
         <AbsoluteFill>
             <Series>
                 <Series.Sequence durationInFrames={durationPerNumber}>
-                    <NumberDisplay src={img3} />
+                    <NumberDisplay src="assets/images/3.png" />
                 </Series.Sequence>
                 <Series.Sequence durationInFrames={durationPerNumber}>
-                    <NumberDisplay src={img2} />
+                    <NumberDisplay src="assets/images/2.png" />
                 </Series.Sequence>
                 <Series.Sequence durationInFrames={durationPerNumber}>
-                    <NumberDisplay src={img1} />
+                    <NumberDisplay src="assets/images/1.png" />
                 </Series.Sequence>
             </Series>
         </AbsoluteFill>

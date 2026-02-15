@@ -1,5 +1,5 @@
 import React from 'react';
-import titleImage from './assets/images/title.webp';
+import { staticFile } from 'remotion';
 
 export const WatermarkCover: React.FC = () => {
     return (
@@ -16,7 +16,7 @@ export const WatermarkCover: React.FC = () => {
             }}
         >
             <img
-                src={titleImage}
+                src={staticFile("assets/images/title.webp")}
                 style={{
                     width: '120%',
                     height: 'auto',

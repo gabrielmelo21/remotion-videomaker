@@ -1,6 +1,5 @@
 import React from 'react';
-import { AbsoluteFill, useCurrentFrame, useVideoConfig, spring, Html5Audio } from 'remotion';
-import swoshSound from './assets/audios/swosh.mp3';
+import { AbsoluteFill, useCurrentFrame, useVideoConfig, spring, Html5Audio, staticFile } from 'remotion';
 
 interface FloatingTextProps {
     content: string;
@@ -53,7 +52,7 @@ export const FloatingText: React.FC<FloatingTextProps> = ({
                 pointerEvents: 'none',
             }}
         >
-            <Html5Audio src={swoshSound} />
+            <Html5Audio src={staticFile("assets/audios/swosh.mp3")} />
             <div
                 className="text-3d-wrapper"
                 style={{
