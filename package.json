@@ -29,6 +29,7 @@
     "dev": "remotion studio",
     "build": "remotion bundle",
     "upgrade": "remotion upgrade",
+    "render": "remotion render MainVideo out/video.mp4",
     "lint": "eslint src && tsc"
   },
   "sideEffects": [
