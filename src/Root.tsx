@@ -9,7 +9,7 @@ import {
   CLIP_LAST_DURATION,
   TRANSITION_DURATION,
 } from "./constants";
-import myData from './Data/video-tiktok-01.json';
+import myData from './Data/video-tiktok.json';
 
 export const RemotionRoot: React.FC = () => {
   const totalDuration = CLIP1_DURATION + CLIP2_DURATION + CLIP2_VOLTA_DURATION + CLIP_LAST_DURATION - (TRANSITION_DURATION * 2);
