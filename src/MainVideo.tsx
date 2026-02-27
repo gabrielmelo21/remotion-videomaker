@@ -119,7 +119,7 @@ export const MainVideo: React.FC<MainVideoProps> = ({
                     />
                     <WatermarkCover />
 
-                    <Sequence durationInFrames={85 + COUNTDOWN_TOTAL_DURATION}>
+                    <Sequence durationInFrames={145 + COUNTDOWN_TOTAL_DURATION}>
                         <Arrow x={-300} y={700} rotation={140} size={250} />
                         <FloatingText
                             content={question1Text}
@@ -131,11 +131,11 @@ export const MainVideo: React.FC<MainVideoProps> = ({
                     </Sequence>
 
                     <Html5Audio src={staticFile(question1Speech)} />
-                    <Sequence from={85}>
+                    <Sequence from={145}>
                         <Countdown />
                     </Sequence>
 
-                    <Sequence from={95 + COUNTDOWN_TOTAL_DURATION}>
+                    <Sequence from={155 + COUNTDOWN_TOTAL_DURATION}>
                         <FloatingText
                             content={answer1TextEn}
                             fontFamily={fontFamily}
@@ -153,7 +153,7 @@ export const MainVideo: React.FC<MainVideoProps> = ({
                     </Sequence>
 
 
-                    <Sequence from={85 + COUNTDOWN_TOTAL_DURATION}>
+                    <Sequence from={145 + COUNTDOWN_TOTAL_DURATION}>
                         <Html5Audio src={staticFile(answer1Speech)} />
                     </Sequence>
 
