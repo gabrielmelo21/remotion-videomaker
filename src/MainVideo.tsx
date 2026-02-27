@@ -94,7 +94,7 @@ export const MainVideo: React.FC<MainVideoProps> = ({
                         volume={0}
                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     />
-                    <Html5Audio src={staticFile(introSoundEffect)} trimBefore={24 * 30} volume={0.5} />
+                    <Html5Audio src={staticFile(introSoundEffect)} volume={0.5} />
                     <Html5Audio src={staticFile(introSpeech)} />
                     <FloatingText
                         content={introText}
@@ -120,7 +120,7 @@ export const MainVideo: React.FC<MainVideoProps> = ({
                     <WatermarkCover />
 
                     <Sequence durationInFrames={85 + COUNTDOWN_TOTAL_DURATION}>
-                        <Arrow x={-300} y={700} rotation={160} size={250} />
+                        <Arrow x={-300} y={700} rotation={140} size={250} />
                         <FloatingText
                             content={question1Text}
                             fontFamily={fontFamily}

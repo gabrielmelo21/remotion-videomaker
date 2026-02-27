@@ -1,0 +1,21 @@
+{
+    "backgroundMusic": "assets/audios/background-music.mp3",
+    "introVideo": "assets/videos/fazendo-cafe.mp4",
+    "introSoundEffect": "assets/audios/coffee-machine.mp3",
+    "introSpeech": "assets/falas/Aprenda-ingles-com-lingobot-v3.wav",
+    "introText": "Aprenda Inglês com \nLingobot!",
+    "mainVideo": "assets/videos/fazendo-cafe.mp4",
+    "mainVideoReversed": "assets/videos/fazendo-cafe.mp4",
+    "question1Speech": "assets/falas/do you know what's the name of this.wav",
+    "question1Text": "Do you know the name of this is? ",
+    "answer1Speech": "assets/falas/coffee-machine1.wav",
+    "answer1TextEn": "Coffee Machine",
+    "answer1TextPt": "Máquina de Café",
+    "question2Speech": "assets/falas/whats-lingobot-doin.mp3",
+    "question2Text": "What's Lingobot doing?",
+    "answer2Speech": "assets/falas/hes-making-coffee.wav",
+    "answer2Text": "He's making coffee with the coffee machine",
+    "outroVideo": "assets/videos/tomando-cafe.mp4",
+    "outroTextEn": "Coffe Machine",
+    "outroTextPt": "Máquina de Café"
+}
